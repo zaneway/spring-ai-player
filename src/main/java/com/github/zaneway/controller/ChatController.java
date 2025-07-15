@@ -1,7 +1,7 @@
 package com.github.zaneway.controller;
 
 import com.github.zaneway.ollama.ChatOllama;
-import com.github.zaneway.ollama.PkiOllama;
+import com.github.zaneway.ollama.TranslationOllama;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ public class ChatController {
   private ChatOllama chatOllama;
 
   @Resource
-  private PkiOllama pkiOllama;
+  private TranslationOllama translationOllama;
 
   @RequestMapping("chat")
   public String chat(@RequestBody ChatRequest msg){
@@ -23,8 +23,8 @@ public class ChatController {
   }
 
 
-  @RequestMapping("pki")
-  public String pki(@RequestBody ChatRequest msg){
-    return pkiOllama.pkiChat(msg.getMsg());
+  @RequestMapping("translation")
+  public String translation(@RequestBody ChatRequest msg){
+    return translationOllama.pkiChat(msg.getMsg());
   }
 }

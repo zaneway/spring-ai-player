@@ -8,14 +8,14 @@ import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PkiOllama {
+public class TranslationOllama {
 
   @Resource
   private OllamaChatModel ollamaChatModel;
 
 
   public String pkiChat(String msg){
-    Prompt prompt = PromptBuilder.pkiBuilder(msg);
+    Prompt prompt = PromptBuilder.translationPromptBuilder(msg);
     List<Generation> results = ollamaChatModel.call(prompt).getResults();
     System.out.println(results);
     return results.get(0).getOutput().getText();
