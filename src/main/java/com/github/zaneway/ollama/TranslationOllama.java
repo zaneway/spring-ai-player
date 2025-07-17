@@ -1,5 +1,6 @@
 package com.github.zaneway.ollama;
 
+import com.github.zaneway.prompt.PromptBuilder;
 import jakarta.annotation.Resource;
 import java.util.List;
 import org.springframework.ai.chat.model.Generation;
@@ -14,10 +15,9 @@ public class TranslationOllama {
   private OllamaChatModel ollamaChatModel;
 
 
-  public String pkiChat(String msg){
+  public String translationChat(String msg){
     Prompt prompt = PromptBuilder.translationPromptBuilder(msg);
     List<Generation> results = ollamaChatModel.call(prompt).getResults();
-    System.out.println(results);
     return results.get(0).getOutput().getText();
 
   }
