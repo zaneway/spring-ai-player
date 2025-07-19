@@ -15,16 +15,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PkiOllama {
+
   @Resource
   private OllamaChatModel ollamaChatModel;
-
   @Resource
   private OllamaEmbeddingModel ollamaEmbeddingModel;
 
-  public String pkiChat(String msg){
+  public String pkiChat(String msg) {
     Prompt prompt = PromptBuilder.pkiPromptBuilder(msg);
     ollamaChatModel.call(prompt);
-    //todo 可以自定义实现Converter
+
+    //todo 可以自定义实现 Converter
     List<String> result = ChatClient.create(ollamaChatModel).prompt(prompt).call()
         .entity(new ListOutputConverter(new DefaultConversionService()));
     return result.get(0);
@@ -32,7 +33,7 @@ public class PkiOllama {
   }
 
 
-  public String pkiChat1(String msg){
+  public String pkiChat1(String msg) {
     Prompt prompt = PromptBuilder.pkiPromptBuilder(msg);
     Generation result = ollamaChatModel.call(prompt).getResult();
 
