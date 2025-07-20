@@ -75,6 +75,27 @@
       <version>1.18.38</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-pdf-document-reader -->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-pdf-document-reader</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
+    <!--markdown 解析-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-markdown-document-reader</artifactId>
+    </dependency>
+
+
+    <!--综合处理? 如 PDF、Word、PPT、HTML 等-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-tika-document-reader</artifactId>
+    </dependency>
+
+
   </dependencies>
   <dependencyManagement>
     <dependencies>
