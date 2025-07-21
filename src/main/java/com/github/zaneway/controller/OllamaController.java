@@ -1,6 +1,7 @@
 package com.github.zaneway.controller;
 
 import com.github.zaneway.ollama.ChatOllama;
+import com.github.zaneway.ollama.FileHandler;
 import com.github.zaneway.ollama.PkiOllama;
 import com.github.zaneway.ollama.RagOllama;
 import com.github.zaneway.ollama.TranslationOllama;
@@ -24,6 +25,8 @@ public class OllamaController {
 
   @Resource
   private RagOllama ragOllama;
+  @Resource
+  private FileHandler fileHandler;
 
   @RequestMapping("chat")
   public String chat(@RequestBody ChatRequest msg){
@@ -52,5 +55,16 @@ public class OllamaController {
   public String chromaGet(@RequestBody ChatRequest msg){
     return ragOllama.query(msg.getMsg());
   }
+
+
+  @RequestMapping("chroma/addFile")
+  public String addFile(@RequestBody FileRequest request){
+    fileHandler.addFileToDB(request.getFilePath(), request.getSkipLine());
+    return "success";
+  }
+
+
+
+
 
 }
