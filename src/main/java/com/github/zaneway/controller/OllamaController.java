@@ -1,5 +1,7 @@
 package com.github.zaneway.controller;
 
+import com.github.zaneway.controller.request.ChatRequest;
+import com.github.zaneway.controller.request.FileRequest;
 import com.github.zaneway.ollama.ChatOllama;
 import com.github.zaneway.ollama.FileHandler;
 import com.github.zaneway.ollama.PkiOllama;

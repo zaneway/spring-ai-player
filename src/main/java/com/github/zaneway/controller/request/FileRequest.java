@@ -1,4 +1,4 @@
-package com.github.zaneway.controller;
+package com.github.zaneway.controller.request;
 
 import lombok.Data;
 
