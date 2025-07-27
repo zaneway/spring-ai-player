@@ -8,15 +8,22 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RagOllama {
+
   @Resource
   private ChromaDB chromaDB;
-  public void add(String data){
+
+  public void add(String data) {
     chromaDB.add(data);
   }
 
-  public String query(String data){
+  public List<Document> query(String data) {
     List<Document> query = chromaDB.query(data);
-    return query.get(0).getText();
+    return query;
+  }
+
+
+  public void addFileToDb(List<Document> datas,String collectionsName, String databasesName, String tenantName) {
+    chromaDB.add(datas, collectionsName, databasesName, tenantName);
   }
 
 }
