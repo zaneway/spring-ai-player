@@ -93,6 +93,12 @@
       <artifactId>spring-ai-tika-document-reader</artifactId>
     </dependency>
 
+    <!--制作RAG-->
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-advisors-vector-store</artifactId>
+    </dependency>
+
 
     <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
     <dependency>
