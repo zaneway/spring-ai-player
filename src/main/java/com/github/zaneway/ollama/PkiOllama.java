@@ -4,12 +4,14 @@ import com.github.zaneway.prompt.PromptBuilder;
 import jakarta.annotation.Resource;
 import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.converter.ListOutputConverter;
 import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.OllamaEmbeddingModel;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.stereotype.Component;
 
@@ -20,13 +22,14 @@ public class PkiOllama {
   private OllamaChatModel ollamaChatModel;
   @Resource
   private OllamaEmbeddingModel ollamaEmbeddingModel;
-
+  @Resource
+  private VectorStore vectorStore;
   public String pkiChat(String msg) {
     Prompt prompt = PromptBuilder.pkiPromptBuilder(msg);
     ollamaChatModel.call(prompt);
 
     //todo 可以自定义实现 Converter
-    List<String> result = ChatClient.create(ollamaChatModel).prompt(prompt).call()
+    List<String> result = ChatClient.create(ollamaChatModel).prompt(prompt).advisors(new QuestionAnswerAdvisor(vectorStore)).call()
         .entity(new ListOutputConverter(new DefaultConversionService()));
     return result.get(0);
 
