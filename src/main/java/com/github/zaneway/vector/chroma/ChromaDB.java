@@ -37,14 +37,23 @@ public class ChromaDB {
 
   public void add(List<Document> documents,String collectionsName, String databasesName, String tenantName) {
     ChromaVectorStore store = ChromaVectorStore.builder(chromaApi, ollamaEmbeddingModel)
-        .collectionName("zaneway")
-        .databaseName("pki")
-        .tenantName("zaneway")
+        .collectionName(collectionsName)
+        .databaseName(databasesName)
+        .tenantName(tenantName)
         .initializeSchema(true)
         .initializeImmediately(true)
         .build();
     store.add(documents);
   }
 
+  public VectorStore getVector(String collectionsName, String databasesName, String tenantName) {
+    return ChromaVectorStore.builder(chromaApi, ollamaEmbeddingModel)
+        .collectionName(collectionsName)
+        .databaseName(databasesName)
+        .tenantName(tenantName)
+        .initializeSchema(true)
+        .initializeImmediately(true)
+        .build();
+  }
 
 }
