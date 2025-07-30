@@ -1,6 +1,7 @@
 package com.github.zaneway.ollama;
 
 import com.github.zaneway.prompt.PromptBuilder;
+import com.github.zaneway.vector.chroma.ChromaDB;
 import jakarta.annotation.Resource;
 import java.util.List;
 import org.springframework.ai.chat.client.ChatClient;
@@ -23,13 +24,14 @@ public class PkiOllama {
   @Resource
   private OllamaEmbeddingModel ollamaEmbeddingModel;
   @Resource
-  private VectorStore vectorStore;
+  private ChromaDB chromaDB;
+
   public String pkiChat(String msg) {
     Prompt prompt = PromptBuilder.pkiPromptBuilder(msg);
     ollamaChatModel.call(prompt);
-
+    VectorStore vector = chromaDB.getVector("zaneway","pki","zaneway");
     //todo 可以自定义实现 Converter
-    List<String> result = ChatClient.create(ollamaChatModel).prompt(prompt).advisors(new QuestionAnswerAdvisor(vectorStore)).call()
+    List<String> result = ChatClient.create(ollamaChatModel).prompt(prompt).advisors(new QuestionAnswerAdvisor(vector)).call()
         .entity(new ListOutputConverter(new DefaultConversionService()));
     return result.get(0);
 
