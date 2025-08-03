@@ -69,6 +69,7 @@ public class ChromaController {
     return collection.name();
   }
 
+  //可以多几个参数，设置 Media
   @RequestMapping("message/add")
   public String chromaAdd(@RequestBody ChatRequest msg) {
     ragOllama.add(msg.getMsg());
