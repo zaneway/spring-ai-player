@@ -25,7 +25,6 @@ public class ChromaController {
 
   @Resource
   private ChromaApi chromaApi;
-
   @Resource
   private RagOllama ragOllama;
   @Resource
@@ -69,7 +68,7 @@ public class ChromaController {
     return collection.name();
   }
 
-  //可以多几个参数，设置 Media
+  //可以多几个参数，设置 MetaData
   @RequestMapping("message/add")
   public String chromaAdd(@RequestBody ChatRequest msg) {
     ragOllama.add(msg.getMsg());
