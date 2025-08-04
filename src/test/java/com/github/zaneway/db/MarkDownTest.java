@@ -13,10 +13,20 @@ public class MarkDownTest {
 
     MarkdownDocumentReaderConfig config = MarkdownDocumentReaderConfig.builder()
         .withHorizontalRuleCreateDocument(true)
-        .withIncludeCodeBlock(true )
+        .withIncludeCodeBlock(false)
+        .withIncludeBlockquote(false)
+        .withAdditionalMetadata("filename",
+            "GMT 0034 基于SM2密码算法的证书认证系统密码及其相关安全技术规范")
         .build();
-    FileSystemResource fileSystemResource = new FileSystemResource("/Users/zhangzhenwei/Downloads/Mermaid语法.md");
-    MarkdownDocumentReader reader = new MarkdownDocumentReader(fileSystemResource,config);
+    //user.dir是当前目录
+    //user.home 是当前用户的基目录
+    String baseDir = System.getProperty("user.home");
+    FileSystemResource fileSystemResource = new FileSystemResource(
+        baseDir + "/Library/Mobile Documents/iCloud~md~obsidian/Documents/wegoo-node/学习/CA/GMT 0034-2014 基于SM2密码算法的证书认证系统密码及其相关安全技术规范.md");
+
+    String filename = fileSystemResource.getFilename();
+    System.out.println(filename);
+    MarkdownDocumentReader reader = new MarkdownDocumentReader(fileSystemResource, config);
     List<Document> documents = reader.get();
     System.out.println(documents);
 
