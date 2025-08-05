@@ -3,10 +3,9 @@ package com.github.zaneway.controller;
 import com.github.zaneway.controller.request.ChatRequest;
 import com.github.zaneway.controller.request.ChromaRequest;
 import com.github.zaneway.controller.request.FileRequest;
-import com.github.zaneway.ollama.FileHandler;
+import com.github.zaneway.file.ParseFileHandler;
 import com.github.zaneway.ollama.RagOllama;
 import jakarta.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +14,7 @@ import org.springframework.ai.chroma.vectorstore.ChromaApi.Collection;
 import org.springframework.ai.chroma.vectorstore.ChromaApi.CreateCollectionRequest;
 import org.springframework.ai.chroma.vectorstore.common.ChromaApiConstants;
 import org.springframework.ai.document.Document;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +28,7 @@ public class ChromaController {
   @Resource
   private RagOllama ragOllama;
   @Resource
-  private FileHandler fileHandler;
+  private ParseFileHandler fileHandler;
 
   @RequestMapping("collections")
   public List<Collection> getCollects(@RequestBody ChromaRequest request) {
@@ -83,8 +83,8 @@ public class ChromaController {
 
   @RequestMapping("file/add")
   public String addFile(@RequestBody FileRequest request) {
-    ArrayList<Document> documents = fileHandler.readFile(request.getFilePath(),
-        request.getSkipLine());
+    FileSystemResource resource = new FileSystemResource(request.getFilePath());
+    List<Document> documents = fileHandler.parseFile(resource, null);
     ragOllama.addFileToDb(documents, request.getCollectionsName(), request.getDatabaseName(),
         request.getTenantName());
     return "success";

@@ -1,37 +1,36 @@
-package com.github.zaneway.ollama;
+package com.github.zaneway.file;
 
-import java.io.FileInputStream;
+import com.github.zaneway.file.enums.FileType;
+import com.github.zaneway.file.enums.FileTypeChoose;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.ExtractedTextFormatter;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.stereotype.Component;
+import org.springframework.core.io.Resource;
 
-@Component
-public class FileHandler {
+@FileTypeChoose(FileType.Word)
+public class WordFileHandler implements ParseFileHandler{
 
-
-
-  public ArrayList<Document> readFile(String filePath, int skipLine) {
+  @Override
+  public List<Document> parseFile(Resource resource, Map<String, Object> additionalMetadata) {
 
 //    Pattern chapterPattern = Pattern.compile("^第\\d+章.*"); // 你可以改成 "Chapter \\d+" 或别的格式
     //数字标题
     try {
       Pattern chapterPattern = Pattern.compile("^\\d+(\\.\\d+)*\\s+.*$");
 
-      FileSystemResource from = new FileSystemResource(filePath);
       //读取文件,跳过文件前xxx页
-      TikaDocumentReader reader = new TikaDocumentReader(from,
-          ExtractedTextFormatter.builder().withNumberOfTopTextLinesToDelete(skipLine).build());
+      TikaDocumentReader reader = new TikaDocumentReader(resource,
+          ExtractedTextFormatter.builder().withNumberOfTopTextLinesToDelete(90).build());
 
       //过滤出目录名称
-      XWPFDocument document = new XWPFDocument(new FileInputStream(filePath));
+      XWPFDocument document = new XWPFDocument(resource.getInputStream());
       List<XWPFParagraph> documents = document.getParagraphs();
       ArrayList<String> titles = new ArrayList<>();
       for (XWPFParagraph para : documents) {
@@ -63,8 +62,5 @@ public class FileHandler {
       throw new RuntimeException(e);
     }
 
-
   }
-
-
 }

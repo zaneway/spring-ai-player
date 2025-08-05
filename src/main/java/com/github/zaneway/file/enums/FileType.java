@@ -1,4 +1,4 @@
-package com.github.zaneway.enums;
+package com.github.zaneway.file.enums;
 
 public enum FileType {
 
