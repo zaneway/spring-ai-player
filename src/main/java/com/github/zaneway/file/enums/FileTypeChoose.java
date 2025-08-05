@@ -13,5 +13,5 @@ import org.springframework.stereotype.Component;
 @Inherited
 @Component
 public @interface FileTypeChoose {
-  FileType value();
+  FileTypeEnum value();
 }
