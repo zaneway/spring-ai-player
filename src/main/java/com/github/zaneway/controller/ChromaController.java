@@ -3,6 +3,7 @@ package com.github.zaneway.controller;
 import com.github.zaneway.controller.request.ChatRequest;
 import com.github.zaneway.controller.request.ChromaRequest;
 import com.github.zaneway.controller.request.FileRequest;
+import com.github.zaneway.file.FileTypeAdapter;
 import com.github.zaneway.file.ParseFileHandler;
 import com.github.zaneway.ollama.RagOllama;
 import jakarta.annotation.Resource;
@@ -27,9 +28,9 @@ public class ChromaController {
   private ChromaApi chromaApi;
   @Resource
   private RagOllama ragOllama;
-  @Resource
-  private ParseFileHandler fileHandler;
 
+  @Resource
+  private FileTypeAdapter adapter;
   @RequestMapping("collections")
   public List<Collection> getCollects(@RequestBody ChromaRequest request) {
     return chromaApi.listCollections(request.getTenantName(), request.getDatabaseName());
@@ -83,8 +84,11 @@ public class ChromaController {
 
   @RequestMapping("file/add")
   public String addFile(@RequestBody FileRequest request) {
+    String[] split = request.getFilePath().split(".");
     FileSystemResource resource = new FileSystemResource(request.getFilePath());
-    List<Document> documents = fileHandler.parseFile(resource, null);
+    //根据文件后缀获取实现类
+    ParseFileHandler handler = adapter.getBean(split[split.length - 1]);
+    List<Document> documents = handler.parseFile(resource, null);
     ragOllama.addFileToDb(documents, request.getCollectionsName(), request.getDatabaseName(),
         request.getTenantName());
     return "success";

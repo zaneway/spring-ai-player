@@ -1,6 +1,6 @@
 package com.github.zaneway.file;
 
-import com.github.zaneway.file.enums.FileType;
+import com.github.zaneway.file.enums.FileTypeEnum;
 import com.github.zaneway.file.enums.FileTypeChoose;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import org.springframework.ai.reader.ExtractedTextFormatter;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.core.io.Resource;
 
-@FileTypeChoose(FileType.Word)
+@FileTypeChoose(FileTypeEnum.Word)
 public class WordFileHandler implements ParseFileHandler{
 
   @Override
