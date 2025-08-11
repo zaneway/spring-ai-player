@@ -7,7 +7,12 @@ import org.springframework.core.io.Resource;
 
 public interface ParseFileHandler {
 
-
+  /**
+   * 根据不同文件类型解析文件
+   * @param resource
+   * @param additionalMetadata
+   * @return
+   */
   List<Document> parseFile(Resource resource, Map<String, Object> additionalMetadata);
 
 }
