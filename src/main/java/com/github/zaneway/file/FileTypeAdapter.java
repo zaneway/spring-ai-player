@@ -13,7 +13,6 @@ public class FileTypeAdapter implements ApplicationContextAware {
 
   private ApplicationContext context;
 
-
   public ParseFileHandler getBean(String suffix) {
     FileTypeEnum typeEnum = FileTypeEnum.containsSuffix(suffix);
     Map<String, ParseFileHandler> beans = context.getBeansOfType(ParseFileHandler.class);
