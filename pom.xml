@@ -99,6 +99,11 @@
       <artifactId>spring-ai-advisors-vector-store</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.alibaba.cloud.ai</groupId>
+      <artifactId>spring-ai-alibaba-core</artifactId>
+      <version>1.0.0.3</version>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
     <dependency>
