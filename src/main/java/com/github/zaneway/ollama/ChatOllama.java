@@ -8,6 +8,7 @@ import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.ai.ollama.OllamaEmbeddingModel;
 import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.generation.augmentation.ContextualQueryAugmenter;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
@@ -22,16 +23,28 @@ public class ChatOllama {
   private OllamaEmbeddingModel ollamaEmbeddingModel;
   @Resource
   private VectorStore vectorStore;
-  public String chat(String msg){
+
+  public String chat(String msg) {
     Builder builder = ChatClient.builder(ollamaChatModel);
-    MessageWindowChatMemory chatMemory = MessageWindowChatMemory.builder().maxMessages(1000).build();
+    MessageWindowChatMemory chatMemory = MessageWindowChatMemory.builder().maxMessages(1000)
+        .build();
     //实现rag
     VectorStoreDocumentRetriever.Builder retriever = VectorStoreDocumentRetriever.builder()
         .vectorStore(vectorStore).similarityThreshold(0.5).topK(10);
-    RetrievalAugmentationAdvisor retrievalAugmentationAdvisor = RetrievalAugmentationAdvisor.builder()
-        .documentRetriever(retriever.build()).build();
 
-    builder.defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(),retrievalAugmentationAdvisor);
+    //允许上下文查询结果为空
+    ContextualQueryAugmenter contextualQueryAugmenter = ContextualQueryAugmenter.builder()
+        .allowEmptyContext(true)
+        .build();
+    //构造advisor
+    RetrievalAugmentationAdvisor retrievalAugmentationAdvisor = RetrievalAugmentationAdvisor.builder()
+        .documentRetriever(retriever.build())
+        .queryAugmenter(contextualQueryAugmenter)
+        .build();
+
+    builder.defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build(),
+        retrievalAugmentationAdvisor);
+
     ChatClient client = builder.build();
     return client.prompt(msg).call().content();
   }
