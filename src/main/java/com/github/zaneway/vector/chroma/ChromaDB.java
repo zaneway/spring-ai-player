@@ -56,4 +56,14 @@ public class ChromaDB {
         .build();
   }
 
+  public VectorStore getDefaultVector() {
+    return ChromaVectorStore.builder(chromaApi, ollamaEmbeddingModel)
+        .collectionName("zaneway")
+        .databaseName("pki")
+        .tenantName("zaneway")
+        .initializeSchema(true)
+        .initializeImmediately(true)
+        .build();
+  }
+
 }
