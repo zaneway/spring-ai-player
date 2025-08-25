@@ -5,7 +5,7 @@ import com.github.zaneway.controller.request.ChromaRequest;
 import com.github.zaneway.controller.request.FileRequest;
 import com.github.zaneway.file.FileTypeAdapter;
 import com.github.zaneway.file.ParseFileHandler;
-import com.github.zaneway.ollama.RagOllama;
+import com.github.zaneway.service.ChromaService;
 import jakarta.annotation.Resource;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ChromaController {
   @Resource
   private ChromaApi chromaApi;
   @Resource
-  private RagOllama ragOllama;
+  private ChromaService chromaService;
 
   @Resource
   private FileTypeAdapter adapter;
@@ -72,13 +72,13 @@ public class ChromaController {
   //可以多几个参数，设置 MetaData
   @RequestMapping("message/add")
   public String chromaAdd(@RequestBody ChatRequest msg) {
-    ragOllama.add(msg.getMsg());
+    chromaService.add(msg.getMsg());
     return "success";
   }
 
   @RequestMapping("message/get")
   public List<Document> chromaGet(@RequestBody ChatRequest msg) {
-    return ragOllama.query(msg.getMsg());
+    return chromaService.query(msg.getMsg());
   }
 
 
@@ -89,7 +89,7 @@ public class ChromaController {
     //根据文件后缀获取实现类
     ParseFileHandler handler = adapter.getBean(split[split.length - 1]);
     List<Document> documents = handler.parseFile(resource, null);
-    ragOllama.addFileToDb(documents, request.getCollectionsName(), request.getDatabaseName(),
+    chromaService.addFileToDb(documents, request.getCollectionsName(), request.getDatabaseName(),
         request.getTenantName());
     return "success";
   }

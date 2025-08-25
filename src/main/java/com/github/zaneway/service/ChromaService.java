@@ -1,4 +1,4 @@
-package com.github.zaneway.ollama;
+package com.github.zaneway.service;
 
 import com.github.zaneway.vector.chroma.ChromaDB;
 import jakarta.annotation.Resource;
@@ -7,7 +7,7 @@ import org.springframework.ai.document.Document;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RagOllama {
+public class ChromaService {
 
   @Resource
   private ChromaDB chromaDB;
@@ -22,7 +22,8 @@ public class RagOllama {
   }
 
 
-  public void addFileToDb(List<Document> datas,String collectionsName, String databasesName, String tenantName) {
+  public void addFileToDb(List<Document> datas, String collectionsName, String databasesName,
+      String tenantName) {
     chromaDB.add(datas, collectionsName, databasesName, tenantName);
   }
 
