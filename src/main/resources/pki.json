@@ -1,0 +1,100 @@
+{
+  "collectionsName":"zaneway",
+  "tenantName":"zaneway",
+  "databaseName":"pki",
+  "title": "GMT-0034-2014 基于SM2密码算法的证书认证系统密码及其相关安全技术规范",
+  "date": "2014",
+  "tags": "SM2，PKI，国密标准，GMT 0034，数字证书认证系统",
+  "datas":[{
+    "text":"本标准起草单位：上海市数字证书认证中心有限公司、上海格尔软件股份有限公司、北京市数字证书认证中心有限公司、长春吉大正元信息技术股份有限公司、北京海泰方圆科技有限公司、无锡江南信息安全工程技术中心、成都卫士通信息产业股份有限公司、兴唐通信科技有限公司、上海颐东网络信息有限公司、万达信息股份有限公司、飞天诚信科技股份有限公司、北京华大智宝电子系统有限公司、北京握奇智能科技有限公司、山东得安信息技术有限公司、国家信息安全工程技术研究中心、国家密码管理局商用密码检测中心。本标准起草人：刘平、崔久强、刘承、谭武征、李述胜、赵丽丽、柳增寿、徐强、李元正、王妮娜、夏东山、李海杰、于华章、陈跃、胡俊义、孔凡玉、袁峰、李志",
+    "overview":"主要起草单位和个人",
+    "chapter": "前言"
+  },
+    {
+      "text":"由一个CA给另一个CA签发的证书，一个CA也可以为自己签发证书，这是一种自签名的证书。",
+      "overview":"CA证书 CA certificate的术语",
+      "chapter": "术语和定义"
+    },
+    {
+      "text":"对数字证书的签发、发布、更新、撤销等数字证书全生命周期进行管理的系统。",
+      "overview":"证书认证系统certificate authentication system；CA系统的术语",
+      "chapter": "术语和定义"
+    },
+    {
+      "text":"一个指定的规则集合，它指出证书对于具有普通安全需求的一个特定团体和(或)具体应用类的适用性。例如，一个特定的证书策略可以指出一个类型的证书对在一定的价格幅度下商品交易的电子数据处理的认证的适用性。",
+      "overview":"证书策略certificate policy的术语",
+      "chapter": "术语和定义"
+    },
+    {
+      "text":"由证书认证机构(CA)签发并发布的被撤销证书的列表。",
+      "overview":"证书撤销列表certificaterevocationlist;CRL 的术语",
+      "chapter": "术语和定义"
+    },
+    {
+      "text":"按照验证策略确认证书有效性和真实性的过程。",
+      "overview":"证书验证certificate validation的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"对数字证书进行全生命周期管理的实体。也称为电子认证服务机构。",
+      "overview":"证书认证机构certificate authority;CA的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"标记已经被注销的CA的公钥证书的列表，表示这些证书已经无效。",
+      "overview":"CA注销列表certificate authority revocation list; ARL的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"在目录信息树中对象证书的一个有序的序列。路径的初始节点是最初待验证对象的公钥，可以通过路径获得最终的顶点的公钥。",
+      "overview":"证书认证路径certification path的术语",
+      "chapter": "术语和定义"
+    },  {
+      "text":"一个目录条目或其他的证书撤销列表分布源，一个通过证书撤销列表分布点发布的证书撤销列表，可以包括由一个CA发布的所有证书中的一个证书子集的注销条目，也可以包括全部证书的注销条目。",
+      "overview":"证书撤销列表分发点certificate revocation list distribution point;CDP的术语",
+      "chapter": "术语和定义"
+    },  {
+      "text":"一个部分的证书撤销列表，它只包括那些在基础证书撤销列表确认后注销状态改变的证书的条目。",
+      "overview":"增量证书撤销列表delta-CRL;dCRL的术语",
+      "chapter": "术语和定义"
+    },  {
+      "text":"在一个证书认证机构所签发的证书中用于唯一标识数字证书的一个整数。",
+      "overview":"证书序列号certificate serial number，CertSN的术语",
+      "chapter": "术语和定义"
+    },  {
+      "text":"也称公钥证书，由证书认证机构(CA)签名的包含公开密钥拥有者信息、公开密钥、签发者信息、有效期以及扩展信息的一种数据结构。按类别可分为个人证书、机构证书和设备证书，按用途可分为签名证书和加密证书。",
+      "overview":"数字证书digital certificate的术语",
+      "chapter": "术语和定义"
+    },   {
+      "text":"在给定的范围内，包含所有已经被注销证书的证书撤销列表。",
+      "overview":"完全的证书撤销列表full CRL的术语",
+      "chapter": "术语和定义"
+    },   {
+      "text":"非对称密码算法中只能由拥有者使用的不公开密钥。",
+      "overview":"私钥 private key的术语",
+      "chapter": "术语和定义"
+    },
+    {
+      "text":"非对称密码算法中可以公开的密钥",
+      "overview":"公钥publickey的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"受理数字证书的申请、更新、恢复和注销等业务的实体。",
+      "overview":"证书注册机构 registration authority;RA的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"使用证书中的数据进行决策的用户或代理",
+      "overview":"依赖方relying party的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"一种椭圆曲线公钥密码算法，其密钥长度为256比特。",
+      "overview":"SM2算法 SM2 algorithm的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"由证书认证机构发布的用于约束安全服务以及设施的使用和提供方式的规则集合。",
+      "overview":"安全策略 security policy 的术语",
+      "chapter": "术语和定义"
+    },{
+      "text":"通常说一个实体信任另一个实体表示后一个实体将完全按照第一个实体的规定进行相关的活动。在本标准中，信任用来描述一个认证实体与证书认证机构之间的关系。",
+      "overview":"信任trust的术语",
+      "chapter": "术语和定义"
+    }
+  ]
+}
