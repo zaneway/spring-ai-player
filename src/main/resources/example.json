@@ -1,0 +1,16 @@
+{
+  "collectionsName": "zaneway",
+  "tenantName": "zaneway",
+  "databaseName": "pki",
+  "title": "GMT-0034-2014 基于SM2密码算法的证书认证系统密码及其相关安全技术规范",
+  "date": "2014",
+  "tags": "SM2，PKI，国密标准，GMT 0034，数字证书认证系统",
+  "datas": [
+    {
+      "text": "本标准起草单位：xxx",
+      "overview": "主要起草单位和个人",
+      "chapter": "前言"
+    },
+    {...}
+  ]
+}
