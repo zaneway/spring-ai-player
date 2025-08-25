@@ -1,5 +1,6 @@
 package com.github.zaneway.controller.request.rag;
 
+import com.github.zaneway.controller.request.ChromaRequest;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,13 +27,13 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @ToString
-public class MetaDataRequest {
+public class MetaDataRequest extends ChromaRequest {
 
   private String title;
 
   private String date;
 
-  private String[] tags;
+  private String tags;
 
   private List<Data> datas;
 
