@@ -1,0 +1,13 @@
+{
+  "collectionsName":"zaneway",
+  "tenantName":"zaneway",
+  "databaseName":"pki",
+  "title": "JRT 0118  金融电子认证规范",
+  "date": "2015",
+  "tags": "金融行业，PKI，电子认证规范，RT 0118",
+  "datas":[{
+    "text":"各机构应妥善保存业务的数字签名数据，保存期限为数字签名证书失效后至少5年",
+    "overview":"数字签名或数字证书保存期要求，证书（过期）失效后至少5年",
+    "chapter": "保存要求"
+  }]
+}
