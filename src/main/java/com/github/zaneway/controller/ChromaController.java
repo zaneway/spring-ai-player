@@ -31,11 +31,24 @@ public class ChromaController {
 
   @Resource
   private FileTypeAdapter adapter;
+  
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:49
+    * @desc 列举所有collection
+    * 
+    */
   @RequestMapping("collections")
   public List<Collection> getCollects(@RequestBody ChromaRequest request) {
     return chromaApi.listCollections(request.getTenantName(), request.getDatabaseName());
   }
 
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:48
+    * @desc 创建chroma db
+    * 
+    */
   @RequestMapping("/databases/create")
   public String createDatabases(@RequestBody ChromaRequest request) {
     if (StringUtils.isEmpty(request.getTenantName())) {
@@ -53,6 +66,12 @@ public class ChromaController {
   }
 
 
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:48
+    * @desc 创建chroma collection
+    * 
+    */
   @RequestMapping("collections/create")
   public String createCollects(@RequestBody ChromaRequest request) {
     if (StringUtils.isEmpty(request.getTenantName())) {
@@ -70,12 +89,24 @@ public class ChromaController {
   }
 
   //可以多几个参数，设置 MetaData
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:48
+    * @desc 向chroma 添加 msg
+    * 
+    */
   @RequestMapping("message/add")
   public String chromaAdd(@RequestBody ChatRequest msg) {
     chromaService.add(msg.getMsg());
     return "success";
   }
 
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:49
+    * @desc 从chroma 查询 msg
+    * 
+    */
   @RequestMapping("message/get")
   public List<Document> chromaGet(@RequestBody ChatRequest msg) {
     return chromaService.query(msg.getMsg());
