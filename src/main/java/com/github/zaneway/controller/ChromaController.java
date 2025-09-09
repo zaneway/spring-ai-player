@@ -3,6 +3,7 @@ package com.github.zaneway.controller;
 import com.github.zaneway.controller.request.ChatRequest;
 import com.github.zaneway.controller.request.ChromaRequest;
 import com.github.zaneway.controller.request.FileRequest;
+import com.github.zaneway.controller.request.rag.MetaDataRequest;
 import com.github.zaneway.file.FileTypeAdapter;
 import com.github.zaneway.file.ParseFileHandler;
 import com.github.zaneway.service.ChromaService;
@@ -23,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/chroma")
 public class ChromaController {
-
   @Resource
   private ChromaApi chromaApi;
   @Resource
@@ -113,6 +113,12 @@ public class ChromaController {
   }
 
 
+   /**
+    * @author zhangzhenwei
+    * @date 2025/9/9 15:50
+    * @desc 添加文件
+    *
+    */
   @RequestMapping("file/add")
   public String addFile(@RequestBody FileRequest request) {
     String[] split = request.getFilePath().split(".");
@@ -125,5 +131,19 @@ public class ChromaController {
     return "success";
   }
 
+  /**
+   * @author zhangzhenwei
+   * @date 2025/9/9 15:50
+   * @desc rag 中添加数据
+   *
+   */
+  @RequestMapping("add")
+  public void add(@RequestBody MetaDataRequest request) {
+    List<Document> documents = chromaService.wrapperDocuments(request);
 
+    chromaService.addFileToDb(documents, request.getCollectionsName(), request.getDatabaseName(),
+        request.getTenantName());
+    System.out.println(documents);
+
+  }
 }
